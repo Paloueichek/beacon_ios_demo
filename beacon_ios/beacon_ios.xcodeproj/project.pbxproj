@@ -15,6 +15,10 @@
 		CDA4ADE92909915200E66B09 /* beacon_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADE82909915200E66B09 /* beacon_iosTests.swift */; };
 		CDA4ADF32909915200E66B09 /* beacon_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADF22909915200E66B09 /* beacon_iosUITests.swift */; };
 		CDA4ADF52909915200E66B09 /* beacon_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADF42909915200E66B09 /* beacon_iosUITestsLaunchTests.swift */; };
+		CDA4AE04290993E900E66B09 /* BeaconListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE03290993E900E66B09 /* BeaconListPresenter.swift */; };
+		CDA4AE072909945D00E66B09 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE062909945D00E66B09 /* Beacon.swift */; };
+		CDA4AE0A2909950900E66B09 /* BeaconStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE092909950900E66B09 /* BeaconStorageManager.swift */; };
+		CDA4AE0D2909964200E66B09 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE0C2909964200E66B09 /* BeaconManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		CDA4ADEE2909915200E66B09 /* beacon_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = beacon_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA4ADF22909915200E66B09 /* beacon_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = beacon_iosUITests.swift; sourceTree = "<group>"; };
 		CDA4ADF42909915200E66B09 /* beacon_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = beacon_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CDA4AE03290993E900E66B09 /* BeaconListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconListPresenter.swift; sourceTree = "<group>"; };
+		CDA4AE062909945D00E66B09 /* Beacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
+		CDA4AE092909950900E66B09 /* BeaconStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconStorageManager.swift; sourceTree = "<group>"; };
+		CDA4AE0C2909964200E66B09 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +105,13 @@
 		CDA4ADD02909915100E66B09 /* beacon_ios */ = {
 			isa = PBXGroup;
 			children = (
+				CDA4AE0B2909963200E66B09 /* Managers */,
+				CDA4AE08290994FB00E66B09 /* Storage */,
+				CDA4AE052909942800E66B09 /* Models */,
+				CDA4AE02290993C800E66B09 /* Presenters */,
+				CDA4AE01290993B800E66B09 /* ViewControllers */,
 				CDA4ADD12909915100E66B09 /* AppDelegate.swift */,
 				CDA4ADD32909915100E66B09 /* SceneDelegate.swift */,
-				CDA4ADD52909915100E66B09 /* BeaconListViewController.swift */,
 				CDA4ADDA2909915200E66B09 /* Assets.xcassets */,
 				CDA4ADDC2909915200E66B09 /* LaunchScreen.storyboard */,
 				CDA4ADDF2909915200E66B09 /* Info.plist */,
@@ -122,6 +134,46 @@
 				CDA4ADF42909915200E66B09 /* beacon_iosUITestsLaunchTests.swift */,
 			);
 			path = beacon_iosUITests;
+			sourceTree = "<group>";
+		};
+		CDA4AE01290993B800E66B09 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CDA4ADD52909915100E66B09 /* BeaconListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CDA4AE02290993C800E66B09 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				CDA4AE03290993E900E66B09 /* BeaconListPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		CDA4AE052909942800E66B09 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CDA4AE062909945D00E66B09 /* Beacon.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CDA4AE08290994FB00E66B09 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				CDA4AE092909950900E66B09 /* BeaconStorageManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		CDA4AE0B2909963200E66B09 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CDA4AE0C2909964200E66B09 /* BeaconManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,9 +306,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDA4AE04290993E900E66B09 /* BeaconListPresenter.swift in Sources */,
 				CDA4ADD62909915100E66B09 /* BeaconListViewController.swift in Sources */,
+				CDA4AE072909945D00E66B09 /* Beacon.swift in Sources */,
 				CDA4ADD22909915100E66B09 /* AppDelegate.swift in Sources */,
 				CDA4ADD42909915100E66B09 /* SceneDelegate.swift in Sources */,
+				CDA4AE0A2909950900E66B09 /* BeaconStorageManager.swift in Sources */,
+				CDA4AE0D2909964200E66B09 /* BeaconManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
