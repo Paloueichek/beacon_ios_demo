@@ -13,7 +13,12 @@ import CoreLocation
 
 
 protocol BeaconLocationManagerDelegate: AnyObject {
-    
+
+    func onLocationManagerAuthorized(manager: BeaconManagerImp)
+    func onLocationManagerError(region: CLRegion?, error: LocationError)
+    func onLocationManagerRanged(regions: [CLBeacon], in region: CLBeaconRegion)
+    func onLocationManagerEntered(region: CLBeaconRegion)
+    func onLocationManagerLeft(region: CLBeaconRegion)
 }
 
 protocol BeaconManager {
@@ -29,7 +34,7 @@ final class BeaconManagerImp: NSObject, BeaconManager {
  
     var delegate: BeaconLocationManagerDelegate?
     private var items = [Beacon]()
-    private var beaconLimit: Int
+     var beaconLimit: Int
     
     private var isAuthorized: Bool {
         let status: CLAuthorizationStatus
@@ -85,23 +90,33 @@ final class BeaconManagerImp: NSObject, BeaconManager {
 extension BeaconManagerImp: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        
+        if manager.authorizationStatus == .authorizedAlways {
+            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
+                if CLLocationManager.isRangingAvailable() {
+                    print("we have ranging")
+                }
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+        locationManager.requestState(for: region)
         print("didStart: \(region)")
     }
     
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print("Failed monitoring region: \(error.localizedDescription)")
+        delegate?.onLocationManagerError(region: region, error: .monitoringFailed(error: error))
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location manager failed: \(error.localizedDescription)")
+        delegate?.onLocationManagerError(region: nil, error: .locationServicesNotEnabled)
     }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         print(beacons)
+        delegate?.onLocationManagerRanged(regions: beacons, in: region)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -115,4 +130,33 @@ extension BeaconManagerImp: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         
     }
+    
+    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        guard let beaconRegion = region as? CLBeaconRegion else {
+            delegate?.onLocationManagerError(region: region, error: .wrongRegion(region: region))
+            return
+        }
+
+        switch state {
+            case .inside:
+                delegate?.onLocationManagerEntered(region: beaconRegion)
+
+            case .outside:
+                delegate?.onLocationManagerLeft(region: beaconRegion)
+
+            case .unknown:
+                print("unknown")
+        }
+    }
+}
+
+
+public enum LocationError: Error {
+
+    case locationServicesNotEnabled
+    case monitoringNotAvailable
+    case monitoringFailed(error: Error)
+    case rangingNotAvailable
+    case wrongRegion(region: CLRegion)
+    case monitoringLimitReached
 }

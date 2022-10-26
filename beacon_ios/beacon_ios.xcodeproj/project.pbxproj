@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		CD17FB3329099FFE006CA54A /* BeaconDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17FB3229099FFE006CA54A /* BeaconDetailsViewController.swift */; };
 		CD17FB352909AFC8006CA54A /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17FB342909AFC8006CA54A /* CustomCell.swift */; };
+		CD2C7A812909D83F0005020D /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2C7A802909D83F0005020D /* EventModel.swift */; };
+		CD2C7A842909D8D70005020D /* CLBeacon+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2C7A832909D8D70005020D /* CLBeacon+Ext.swift */; };
+		CD2C7A862909E4F70005020D /* BeaconContactsSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2C7A852909E4F70005020D /* BeaconContactsSummary.swift */; };
 		CDA4ADD22909915100E66B09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD12909915100E66B09 /* AppDelegate.swift */; };
 		CDA4ADD42909915100E66B09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD32909915100E66B09 /* SceneDelegate.swift */; };
 		CDA4ADD62909915100E66B09 /* BeaconListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD52909915100E66B09 /* BeaconListViewController.swift */; };
@@ -43,6 +46,9 @@
 /* Begin PBXFileReference section */
 		CD17FB3229099FFE006CA54A /* BeaconDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconDetailsViewController.swift; sourceTree = "<group>"; };
 		CD17FB342909AFC8006CA54A /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		CD2C7A802909D83F0005020D /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		CD2C7A832909D8D70005020D /* CLBeacon+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLBeacon+Ext.swift"; sourceTree = "<group>"; };
+		CD2C7A852909E4F70005020D /* BeaconContactsSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconContactsSummary.swift; sourceTree = "<group>"; };
 		CDA4ADCE2909915100E66B09 /* beacon_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beacon_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA4ADD12909915100E66B09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDA4ADD32909915100E66B09 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD2C7A822909D8B20005020D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CD2C7A832909D8D70005020D /* CLBeacon+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CDA4ADC52909915100E66B09 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +123,7 @@
 		CDA4ADD02909915100E66B09 /* beacon_ios */ = {
 			isa = PBXGroup;
 			children = (
+				CD2C7A822909D8B20005020D /* Extensions */,
 				CDA4AE0B2909963200E66B09 /* Managers */,
 				CDA4AE08290994FB00E66B09 /* Storage */,
 				CDA4AE052909942800E66B09 /* Models */,
@@ -162,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				CDA4AE062909945D00E66B09 /* Beacon.swift */,
+				CD2C7A802909D83F0005020D /* EventModel.swift */,
+				CD2C7A852909E4F70005020D /* BeaconContactsSummary.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,11 +329,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD2C7A842909D8D70005020D /* CLBeacon+Ext.swift in Sources */,
 				CDA4AE04290993E900E66B09 /* BeaconListPresenter.swift in Sources */,
 				CDA4ADD62909915100E66B09 /* BeaconListViewController.swift in Sources */,
 				CDA4AE072909945D00E66B09 /* Beacon.swift in Sources */,
 				CD17FB3329099FFE006CA54A /* BeaconDetailsViewController.swift in Sources */,
+				CD2C7A812909D83F0005020D /* EventModel.swift in Sources */,
 				CD17FB352909AFC8006CA54A /* CustomCell.swift in Sources */,
+				CD2C7A862909E4F70005020D /* BeaconContactsSummary.swift in Sources */,
 				CDA4ADD22909915100E66B09 /* AppDelegate.swift in Sources */,
 				CDA4ADD42909915100E66B09 /* SceneDelegate.swift in Sources */,
 				CDA4AE0A2909950900E66B09 /* BeaconStorageManager.swift in Sources */,
