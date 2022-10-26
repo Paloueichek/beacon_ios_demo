@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class BeaconListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

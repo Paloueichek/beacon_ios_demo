@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		CDA4ADD22909915100E66B09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD12909915100E66B09 /* AppDelegate.swift */; };
 		CDA4ADD42909915100E66B09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD32909915100E66B09 /* SceneDelegate.swift */; };
-		CDA4ADD62909915100E66B09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD52909915100E66B09 /* ViewController.swift */; };
-		CDA4ADD92909915100E66B09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDA4ADD72909915100E66B09 /* Main.storyboard */; };
+		CDA4ADD62909915100E66B09 /* BeaconListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD52909915100E66B09 /* BeaconListViewController.swift */; };
 		CDA4ADDB2909915200E66B09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA4ADDA2909915200E66B09 /* Assets.xcassets */; };
 		CDA4ADDE2909915200E66B09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDA4ADDC2909915200E66B09 /* LaunchScreen.storyboard */; };
 		CDA4ADE92909915200E66B09 /* beacon_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADE82909915200E66B09 /* beacon_iosTests.swift */; };
@@ -39,8 +38,7 @@
 		CDA4ADCE2909915100E66B09 /* beacon_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beacon_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA4ADD12909915100E66B09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDA4ADD32909915100E66B09 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CDA4ADD52909915100E66B09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CDA4ADD82909915100E66B09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CDA4ADD52909915100E66B09 /* BeaconListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconListViewController.swift; sourceTree = "<group>"; };
 		CDA4ADDA2909915200E66B09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDA4ADDD2909915200E66B09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDA4ADDF2909915200E66B09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,8 +99,7 @@
 			children = (
 				CDA4ADD12909915100E66B09 /* AppDelegate.swift */,
 				CDA4ADD32909915100E66B09 /* SceneDelegate.swift */,
-				CDA4ADD52909915100E66B09 /* ViewController.swift */,
-				CDA4ADD72909915100E66B09 /* Main.storyboard */,
+				CDA4ADD52909915100E66B09 /* BeaconListViewController.swift */,
 				CDA4ADDA2909915200E66B09 /* Assets.xcassets */,
 				CDA4ADDC2909915200E66B09 /* LaunchScreen.storyboard */,
 				CDA4ADDF2909915200E66B09 /* Info.plist */,
@@ -233,7 +230,6 @@
 			files = (
 				CDA4ADDE2909915200E66B09 /* LaunchScreen.storyboard in Resources */,
 				CDA4ADDB2909915200E66B09 /* Assets.xcassets in Resources */,
-				CDA4ADD92909915100E66B09 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDA4ADD62909915100E66B09 /* ViewController.swift in Sources */,
+				CDA4ADD62909915100E66B09 /* BeaconListViewController.swift in Sources */,
 				CDA4ADD22909915100E66B09 /* AppDelegate.swift in Sources */,
 				CDA4ADD42909915100E66B09 /* SceneDelegate.swift in Sources */,
 			);
@@ -297,14 +293,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CDA4ADD72909915100E66B09 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDA4ADD82909915100E66B09 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CDA4ADDC2909915200E66B09 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,7 +430,6 @@
 				INFOPLIST_FILE = beacon_ios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -470,7 +457,6 @@
 				INFOPLIST_FILE = beacon_ios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
