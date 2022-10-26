@@ -16,6 +16,7 @@ class BeaconListViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableview = UITableView()
         tableview.translatesAutoresizingMaskIntoConstraints = false
+        tableview.register(CustomCell.self, forCellReuseIdentifier: CustomCell.identifier)
         tableview.delegate = self
         tableview.dataSource = self
         tableview.backgroundColor = .white
@@ -77,8 +78,11 @@ extension BeaconListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier) as! CustomCell
+        cell.nameLabel.text = presenter?.fetchedBeacons[indexPath.row].name
+        cell.uuidLabel.text = String("\(presenter?.fetchedBeacons[indexPath.row].uuid)")
+        cell.majorLabel.text = String("\(presenter?.fetchedBeacons[indexPath.row].major)")
+        cell.minorLabel.text = String("\(presenter?.fetchedBeacons[indexPath.row].minor)")
         return cell
     }
     
