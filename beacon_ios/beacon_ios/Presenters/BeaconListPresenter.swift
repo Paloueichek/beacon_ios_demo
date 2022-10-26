@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol BeaconDetailsDelegate: class {
-    func addBeacon(item: Beacon)
-}
-
 class BeaconListPresenter {
 
     var fetchedBeacons: [Beacon] = []
@@ -36,10 +32,10 @@ class BeaconListPresenter {
     }
     
     @objc func addBeaconButtonPressed(_ sender: Any) {
-//        let detailsVC = BeaconDetailsViewController()
-//        detailsVC.delegate = self
-//        vc?.navigationController?.present(detailsVC, animated: true)
-//        vc?.tableView.reloadData()
+        let detailsVC = BeaconDetailsViewController()
+        detailsVC.delegate = self
+        vc?.navigationController?.present(detailsVC, animated: true)
+        vc?.tableView.reloadData()
     }
     
     func addBeacon(item: Beacon) {

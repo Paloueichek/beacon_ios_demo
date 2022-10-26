@@ -42,10 +42,6 @@ class BeaconListViewController: UIViewController {
         self.tableView.reloadData()
     }
     
-    @objc func addBeaconButtonPressed(_ sender: Any) {
-        presenter?.addBeaconButtonPressed(sender)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -65,6 +61,13 @@ class BeaconListViewController: UIViewController {
         self.floatingButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         self.floatingButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
         self.floatingButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -40).isActive = true
+    }
+}
+
+extension BeaconListViewController {
+    
+    @objc func addBeaconButtonPressed(_ sender: Any) {
+        presenter?.addBeaconButtonPressed(sender)
     }
 }
 
