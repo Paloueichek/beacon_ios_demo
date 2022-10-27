@@ -73,16 +73,26 @@ extension BeaconListViewController {
 }
 
 extension BeaconListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return presenter?.allEvents.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.fetchedBeacons.count ?? 0
+        return presenter?.allEvents.compactMap{ $1 }.count  ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier) as! CustomCell
-        cell.nameLabel.text = presenter?.fetchedBeacons[indexPath.row].name
-        cell.uuidLabel.text = String("\(presenter?.fetchedBeacons[indexPath.row].uuid)")
-        cell.majorLabel.text = String("\(presenter?.fetchedBeacons[indexPath.row].major)")
-        cell.minorLabel.text = String("\(presenter?.fetchedBeacons[indexPath.row].minor)")
+        
+        let events = presenter?.allEvents.flatMap { $1 }
+        
+        cell.nameLabel.text = events?[indexPath.row].event
+        cell.uuidLabel.text = events?[indexPath.row].uuid
+        cell.majorLabel.text = events?[indexPath.row].major
+        cell.minorLabel.text = events?[indexPath.row].minor
+        cell.rssiLabel.text = events?[indexPath.row].rssi?.string
+        cell.distanceLabel.text = events?[indexPath.row].distance?.string
         return cell
     }
     
@@ -97,7 +107,6 @@ extension BeaconListViewController: UITableViewDelegate, UITableViewDataSource {
             }
          presenter?.stopMonitoring(item: fetchBeacons[indexPath.row])
          presenter?.removeBeacon(indexPath: indexPath.row)
-
         }
     }
 }
