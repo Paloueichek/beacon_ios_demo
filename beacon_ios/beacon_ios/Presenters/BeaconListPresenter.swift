@@ -13,6 +13,7 @@ class BeaconListPresenter {
     var fetchedBeacons: [Beacon] = []
     var beaconsInRange: Set<Beacon> = []
     var allEvents: [Beacon: [EventModel]] = [:]
+    var monitoredRegions: [CLBeaconRegion] = []
     private let beaconManager = BeaconManagerImp()
     private let beaconStoreManager = BeaconStorageManager()
     private weak var vc: BeaconListViewController?
@@ -23,6 +24,7 @@ class BeaconListPresenter {
         self.vc = vc
         self.loadItems()
         beaconManager.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(onAppEnteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     func stopMonitoring(item: Beacon) {
@@ -76,7 +78,7 @@ class BeaconListPresenter {
         if let beaconEvents = allEvents[beacon] {
             var newBeaconEvents = beaconEvents
             newBeaconEvents.append(event)
-            if newBeaconEvents.count > beaconManager.beaconLimit {
+            if newBeaconEvents.count > 100 {
                 newBeaconEvents = newBeaconEvents.sorted(by: { ($0.timestamp ?? 0) > ($1.timestamp ?? 0) }).dropLast(1)
             }
             allEvents[beacon] = newBeaconEvents
@@ -84,6 +86,11 @@ class BeaconListPresenter {
             allEvents[beacon] = [event]
         }
     }
+    
+    @objc private func onAppEnteredBackground() {
+        beaconManager.updateMonitoredRegions(regions: monitoredRegions)
+    }
+
     
     private func updateSummaries() {
         summaries = allEvents.map {
@@ -127,6 +134,7 @@ extension BeaconListPresenter : BeaconLocationManagerDelegate {
             let result = fetchedBeacons.first(forBeacon: region)
             return result
         }
+        monitoredRegions.append(region)
         beaconsInRange.formUnion(beacons)
         regions.forEach { region in
             guard let beacon = fetchedBeacons.first(forBeacon: region), beaconsInRange.contains(beacon) else {

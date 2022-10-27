@@ -24,6 +24,7 @@ protocol BeaconLocationManagerDelegate: AnyObject {
 protocol BeaconManager {
 
     var delegate: BeaconLocationManagerDelegate? { get set }
+    func updateMonitoredRegions(regions: [CLBeaconRegion])
     func startMonitoring(_ item: Beacon)
     func stopMonitoring(_ item: Beacon)
     func stopRanging(_ item: Beacon)
@@ -31,10 +32,10 @@ protocol BeaconManager {
 }
 
 final class BeaconManagerImp: NSObject, BeaconManager {
- 
+    
     var delegate: BeaconLocationManagerDelegate?
     private var items = [Beacon]()
-     var beaconLimit: Int
+    private var beaconLimit: Int = 20
     
     private var isAuthorized: Bool {
         let status: CLAuthorizationStatus
@@ -58,9 +59,6 @@ final class BeaconManagerImp: NSObject, BeaconManager {
         return manager
     }()
     
-    init( beaconLimit: Int = 20) {
-        self.beaconLimit = beaconLimit
-    }
 
     func startMonitoring(_ item: Beacon) {
         guard isAuthorized else {
@@ -69,6 +67,27 @@ final class BeaconManagerImp: NSObject, BeaconManager {
         guard let region = item.toRegion(prefix: item.name ?? "") else { return }
         locationManager.startMonitoring(for: region)
     }
+    
+    func updateMonitoredRegions(regions: [CLBeaconRegion]) {
+        guard isAuthorized else {
+            return
+        }
+   
+        if regions.count > beaconLimit {
+            delegate?.onLocationManagerError(region: nil, error: .monitoringLimitReached)
+        }
+        
+        regions.prefix(beaconLimit).forEach { region in
+            region.notifyEntryStateOnDisplay = true
+            region.notifyOnExit = true
+            region.notifyOnEntry = true
+
+            if !locationManager.monitoredRegions.contains(region) {
+                locationManager.startMonitoring(for: region)
+            }
+        }
+    }
+    
     
     func stopMonitoring(_ item: Beacon) {
         guard let region = item.toRegion(prefix: item.name ?? "") else { return }
