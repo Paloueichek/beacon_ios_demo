@@ -73,13 +73,10 @@ extension BeaconListViewController {
 }
 
 extension BeaconListViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter?.allEvents.count ?? 0
-    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.allEvents.compactMap{ $1 }.count  ?? 0
+        return presenter?.fetchedBeacons.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,12 +84,17 @@ extension BeaconListViewController: UITableViewDelegate, UITableViewDataSource {
         
         let events = presenter?.allEvents.flatMap { $1 }
         
-        cell.nameLabel.text = events?[indexPath.row].event
-        cell.uuidLabel.text = events?[indexPath.row].uuid
-        cell.majorLabel.text = events?[indexPath.row].major
-        cell.minorLabel.text = events?[indexPath.row].minor
-        cell.rssiLabel.text = events?[indexPath.row].rssi?.string
-        cell.distanceLabel.text = events?[indexPath.row].distance?.string
+//        cell.nameLabel.text = events?[indexPath.row].event
+//        cell.uuidLabel.text = events?[indexPath.row].uuid
+//        cell.majorLabel.text = events?[indexPath.row].major
+//        cell.minorLabel.text = events?[indexPath.row].minor
+//        cell.rssiLabel.text = events?[indexPath.row].rssi?.string
+//        cell.distanceLabel.text = events?[indexPath.row].distance?.string
+        
+        cell.nameLabel.text = presenter?.fetchedBeacons[indexPath.row].name
+        cell.uuidLabel.text = presenter?.fetchedBeacons[indexPath.row].uuid
+        cell.majorLabel.text = presenter?.fetchedBeacons[indexPath.row].major.string
+        cell.minorLabel.text = presenter?.fetchedBeacons[indexPath.row].minor.string
         return cell
     }
     
