@@ -11,9 +11,11 @@ import Foundation
 import UIKit
 import CoreLocation
 
+private enum Constant {
+    static let beaconLimit: Int = 20
+}
 
 protocol BeaconLocationManagerDelegate: AnyObject {
-
     func onLocationManagerAuthorized(manager: BeaconManagerImp)
     func onLocationManagerError(region: CLRegion?, error: LocationError)
     func onLocationManagerRanged(regions: [CLBeacon], in region: CLBeaconRegion)
@@ -22,7 +24,6 @@ protocol BeaconLocationManagerDelegate: AnyObject {
 }
 
 protocol BeaconManager {
-
     var delegate: BeaconLocationManagerDelegate? { get set }
     func updateMonitoredRegions(regions: [CLBeaconRegion])
     func startMonitoring(_ item: Beacon)
@@ -33,9 +34,8 @@ protocol BeaconManager {
 
 final class BeaconManagerImp: NSObject, BeaconManager {
     
-    var delegate: BeaconLocationManagerDelegate?
+    weak var delegate: BeaconLocationManagerDelegate?
     private var items = [Beacon]()
-    private var beaconLimit: Int = 20
     
     private var isAuthorized: Bool {
         let status: CLAuthorizationStatus
@@ -59,7 +59,6 @@ final class BeaconManagerImp: NSObject, BeaconManager {
         return manager
     }()
     
-
     func startMonitoring(_ item: Beacon) {
         guard isAuthorized else {
             return
@@ -73,11 +72,11 @@ final class BeaconManagerImp: NSObject, BeaconManager {
             return
         }
    
-        if regions.count > beaconLimit {
+        if regions.count > Constant.beaconLimit {
             delegate?.onLocationManagerError(region: nil, error: .monitoringLimitReached)
         }
         
-        regions.prefix(beaconLimit).forEach { region in
+        regions.prefix(Constant.beaconLimit).forEach { region in
             region.notifyEntryStateOnDisplay = true
             region.notifyOnExit = true
             region.notifyOnEntry = true
@@ -87,7 +86,6 @@ final class BeaconManagerImp: NSObject, BeaconManager {
             }
         }
     }
-    
     
     func stopMonitoring(_ item: Beacon) {
         guard let region = item.toRegion(prefix: item.name ?? "") else { return }
@@ -103,79 +101,4 @@ final class BeaconManagerImp: NSObject, BeaconManager {
         let beaconConstraint = CLBeaconIdentityConstraint(uuid: UUID(uuidString: item.uuid)!, major: CLBeaconMajorValue(item.major), minor: CLBeaconMinorValue(item.minor))
         locationManager.startRangingBeacons(satisfying: beaconConstraint)
     }
-    
-}
-
-extension BeaconManagerImp: CLLocationManagerDelegate {
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .authorizedAlways {
-            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
-                if CLLocationManager.isRangingAvailable() {
-                    print("we have ranging")
-                }
-            }
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        locationManager.requestState(for: region)
-        print("didStart: \(region)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-        print("Failed monitoring region: \(error.localizedDescription)")
-        delegate?.onLocationManagerError(region: region, error: .monitoringFailed(error: error))
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location manager failed: \(error.localizedDescription)")
-        delegate?.onLocationManagerError(region: nil, error: .locationServicesNotEnabled)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        print(beacons)
-        delegate?.onLocationManagerRanged(regions: beacons, in: region)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        guard let beaconRegion = region as? CLBeaconRegion else {
-            delegate?.onLocationManagerError(region: region, error: .wrongRegion(region: region))
-            return
-        }
-
-        switch state {
-            case .inside:
-                delegate?.onLocationManagerEntered(region: beaconRegion)
-
-            case .outside:
-                delegate?.onLocationManagerLeft(region: beaconRegion)
-
-            case .unknown:
-                print("unknown")
-        }
-    }
-}
-
-
-public enum LocationError: Error {
-
-    case locationServicesNotEnabled
-    case monitoringNotAvailable
-    case monitoringFailed(error: Error)
-    case rangingNotAvailable
-    case wrongRegion(region: CLRegion)
-    case monitoringLimitReached
 }

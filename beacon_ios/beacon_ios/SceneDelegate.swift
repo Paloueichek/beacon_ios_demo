@@ -16,10 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         
-        let rootViewController = BeaconListViewController()
+        let beaconManager = BeaconManagerImp()
+        let presenter = BeaconListPresenterImp(beaconManager: beaconManager)
+        let rootViewController = BeaconListViewController(presenter: presenter as! BeaconListPresenter)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.navigationBar.topItem?.title = "Beacon Scanner"
-        navigationController.navigationBar.backgroundColor = .systemBlue
         navigationController.navigationBar.prefersLargeTitles = true
         window.rootViewController = navigationController
 

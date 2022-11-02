@@ -8,22 +8,28 @@
 import UIKit
 import CoreLocation
 
-class BeaconListPresenter {
+
+protocol BeaconListPresenter {
+    var fetchedBeacons: [Beacon] { get set }
+    func stopMonitoring(item: Beacon)
+    func removeBeacon(indexPath: Int)
+    func persistItems()
+    func loadItems()
+}
+
+class BeaconListPresenterImp: BeaconListPresenter{
 
     var fetchedBeacons: [Beacon] = []
-    var beaconsInRange: Set<Beacon> = []
     var allEvents: [Beacon: [EventModel]] = [:]
-    var monitoredRegions: [CLBeaconRegion] = []
-    private let beaconManager = BeaconManagerImp()
+    private var beaconsInRange: Set<Beacon> = []
+    private var monitoredRegions: [CLBeaconRegion] = []
+    private var beaconManager: BeaconManager
     private let beaconStoreManager = BeaconStorageManager()
-    private weak var vc: BeaconListViewController?
+    private var summaries: [BeaconContactsSummary] = []
     
-    var summaries: [BeaconContactsSummary] = []
-    
-    init(vc: BeaconListViewController) {
-        self.vc = vc
-        self.loadItems()
-        beaconManager.delegate = self
+    init(beaconManager: BeaconManager) {
+        self.beaconManager = beaconManager
+        self.beaconManager.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(onAppEnteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
@@ -39,36 +45,16 @@ class BeaconListPresenter {
        fetchedBeacons = self.beaconStoreManager.loadBeacons()
     }
     
-    @objc func addBeaconButtonPressed(_ sender: Any) {
-        let detailsVC = BeaconDetailsViewController()
-        detailsVC.delegate = self
-        vc?.navigationController?.present(detailsVC, animated: true)
-        vc?.tableView.reloadData()
-    }
-    
     func addBeacon(item: Beacon) {
         fetchedBeacons.append(item)
-        
-        vc?.tableView.beginUpdates()
-        let newIndexPath = IndexPath(row: fetchedBeacons.count - 1, section: 0)
-        vc?.tableView.insertRows(at: [newIndexPath], with: .automatic)
-        
-        vc?.tableView.endUpdates()
-        persistItems()
         beaconManager.startMonitoring(item)
+        persistItems()
     }
     
     func removeBeacon(indexPath: Int) {
         beaconManager.stopMonitoring(fetchedBeacons[indexPath])
         fetchedBeacons.remove(at: indexPath)
-     
-        let newIndexPath = IndexPath(row: fetchedBeacons.count , section: 0 )
-        vc?.tableView.beginUpdates()
-        vc?.tableView.deleteRows(at: [newIndexPath], with: .automatic)
-        vc?.tableView.endUpdates()
-      
         persistItems()
-        vc?.tableView.reloadData()
     }
     
     
@@ -114,12 +100,7 @@ class BeaconListPresenter {
     }
 }
 
- 
-extension BeaconListPresenter: BeaconDetailsDelegate {
-    
-}
-
-extension BeaconListPresenter : BeaconLocationManagerDelegate {
+extension BeaconListPresenterImp : BeaconLocationManagerDelegate {
     
     func onLocationManagerAuthorized(manager: BeaconManagerImp) {
         
@@ -143,7 +124,6 @@ extension BeaconListPresenter : BeaconLocationManagerDelegate {
             let event = region.toEvent(event: .in)
             ranged(beacon: beacon, event: event)
         }
-
     }
     
     func onLocationManagerEntered(region: CLBeaconRegion) {

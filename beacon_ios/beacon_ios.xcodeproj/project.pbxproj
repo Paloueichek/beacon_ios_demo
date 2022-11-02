@@ -13,6 +13,8 @@
 		CD2C7A842909D8D70005020D /* CLBeacon+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2C7A832909D8D70005020D /* CLBeacon+Ext.swift */; };
 		CD2C7A862909E4F70005020D /* BeaconContactsSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2C7A852909E4F70005020D /* BeaconContactsSummary.swift */; };
 		CD2C7A88290A650D0005020D /* LosslessStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2C7A87290A650D0005020D /* LosslessStringConvertible.swift */; };
+		CD8F6714291242510001AFAE /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8F6713291242510001AFAE /* LocationError.swift */; };
+		CD8F6717291244D80001AFAE /* BeaconManager+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8F6716291244D80001AFAE /* BeaconManager+Delegates.swift */; };
 		CDA4ADD22909915100E66B09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD12909915100E66B09 /* AppDelegate.swift */; };
 		CDA4ADD42909915100E66B09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD32909915100E66B09 /* SceneDelegate.swift */; };
 		CDA4ADD62909915100E66B09 /* BeaconListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADD52909915100E66B09 /* BeaconListViewController.swift */; };
@@ -21,7 +23,7 @@
 		CDA4ADE92909915200E66B09 /* beacon_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADE82909915200E66B09 /* beacon_iosTests.swift */; };
 		CDA4ADF32909915200E66B09 /* beacon_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADF22909915200E66B09 /* beacon_iosUITests.swift */; };
 		CDA4ADF52909915200E66B09 /* beacon_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4ADF42909915200E66B09 /* beacon_iosUITestsLaunchTests.swift */; };
-		CDA4AE04290993E900E66B09 /* BeaconListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE03290993E900E66B09 /* BeaconListPresenter.swift */; };
+		CDA4AE04290993E900E66B09 /* BeaconListPresenterImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE03290993E900E66B09 /* BeaconListPresenterImp.swift */; };
 		CDA4AE072909945D00E66B09 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE062909945D00E66B09 /* Beacon.swift */; };
 		CDA4AE0A2909950900E66B09 /* BeaconStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE092909950900E66B09 /* BeaconStorageManager.swift */; };
 		CDA4AE0D2909964200E66B09 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE0C2909964200E66B09 /* BeaconManager.swift */; };
@@ -51,6 +53,8 @@
 		CD2C7A832909D8D70005020D /* CLBeacon+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLBeacon+Ext.swift"; sourceTree = "<group>"; };
 		CD2C7A852909E4F70005020D /* BeaconContactsSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconContactsSummary.swift; sourceTree = "<group>"; };
 		CD2C7A87290A650D0005020D /* LosslessStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LosslessStringConvertible.swift; sourceTree = "<group>"; };
+		CD8F6713291242510001AFAE /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
+		CD8F6716291244D80001AFAE /* BeaconManager+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconManager+Delegates.swift"; sourceTree = "<group>"; };
 		CDA4ADCE2909915100E66B09 /* beacon_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beacon_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA4ADD12909915100E66B09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDA4ADD32909915100E66B09 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +67,7 @@
 		CDA4ADEE2909915200E66B09 /* beacon_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = beacon_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA4ADF22909915200E66B09 /* beacon_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = beacon_iosUITests.swift; sourceTree = "<group>"; };
 		CDA4ADF42909915200E66B09 /* beacon_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = beacon_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		CDA4AE03290993E900E66B09 /* BeaconListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconListPresenter.swift; sourceTree = "<group>"; };
+		CDA4AE03290993E900E66B09 /* BeaconListPresenterImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconListPresenterImp.swift; sourceTree = "<group>"; };
 		CDA4AE062909945D00E66B09 /* Beacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
 		CDA4AE092909950900E66B09 /* BeaconStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconStorageManager.swift; sourceTree = "<group>"; };
 		CDA4AE0C2909964200E66B09 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
@@ -103,6 +107,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		CD8F6712291242410001AFAE /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CD8F6713291242510001AFAE /* LocationError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		CDA4ADC52909915100E66B09 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +138,7 @@
 		CDA4ADD02909915100E66B09 /* beacon_ios */ = {
 			isa = PBXGroup;
 			children = (
+				CD8F6712291242410001AFAE /* Errors */,
 				CD2C7A822909D8B20005020D /* Extensions */,
 				CDA4AE0B2909963200E66B09 /* Managers */,
 				CDA4AE08290994FB00E66B09 /* Storage */,
@@ -171,7 +184,7 @@
 		CDA4AE02290993C800E66B09 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
-				CDA4AE03290993E900E66B09 /* BeaconListPresenter.swift */,
+				CDA4AE03290993E900E66B09 /* BeaconListPresenterImp.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -198,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA4AE0C2909964200E66B09 /* BeaconManager.swift */,
+				CD8F6716291244D80001AFAE /* BeaconManager+Delegates.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -333,17 +347,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD2C7A842909D8D70005020D /* CLBeacon+Ext.swift in Sources */,
-				CDA4AE04290993E900E66B09 /* BeaconListPresenter.swift in Sources */,
+				CDA4AE04290993E900E66B09 /* BeaconListPresenterImp.swift in Sources */,
 				CDA4ADD62909915100E66B09 /* BeaconListViewController.swift in Sources */,
 				CDA4AE072909945D00E66B09 /* Beacon.swift in Sources */,
 				CD17FB3329099FFE006CA54A /* BeaconDetailsViewController.swift in Sources */,
 				CD2C7A812909D83F0005020D /* EventModel.swift in Sources */,
 				CD17FB352909AFC8006CA54A /* CustomCell.swift in Sources */,
+				CD8F6714291242510001AFAE /* LocationError.swift in Sources */,
 				CD2C7A862909E4F70005020D /* BeaconContactsSummary.swift in Sources */,
 				CDA4ADD22909915100E66B09 /* AppDelegate.swift in Sources */,
 				CDA4ADD42909915100E66B09 /* SceneDelegate.swift in Sources */,
 				CD2C7A88290A650D0005020D /* LosslessStringConvertible.swift in Sources */,
 				CDA4AE0A2909950900E66B09 /* BeaconStorageManager.swift in Sources */,
+				CD8F6717291244D80001AFAE /* BeaconManager+Delegates.swift in Sources */,
 				CDA4AE0D2909964200E66B09 /* BeaconManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
