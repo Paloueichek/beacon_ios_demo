@@ -12,6 +12,7 @@ import CoreLocation
 class BeaconListViewController: UIViewController {
     
     private var presenter: BeaconListPresenter?
+    weak var coordinator: MainCoordinator?
     
     lazy var tableView: UITableView = {
         let tableview = UITableView()
@@ -33,7 +34,6 @@ class BeaconListViewController: UIViewController {
         button.addTarget(self, action: #selector(addBeaconButtonPressed), for: .touchUpInside)
         return button
     }()
-    
     
     init(presenter: BeaconListPresenter) {
         super.init(nibName: nil, bundle: nil)
@@ -78,9 +78,7 @@ class BeaconListViewController: UIViewController {
 extension BeaconListViewController {
     
     @objc func addBeaconButtonPressed(_ sender: Any) {
-        let detailsVC = BeaconDetailsViewController()
-        detailsVC.delegate = self
-        self.navigationController?.present(detailsVC, animated: true)
+        coordinator?.goToDetailsVC()
     }
 }
 

@@ -10,20 +10,19 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: MainCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: scene)
         
-        let beaconManager = BeaconManagerImp()
-        let presenter = BeaconListPresenterImp(beaconManager: beaconManager)
-        let rootViewController = BeaconListViewController(presenter: presenter as BeaconListPresenter)
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        navigationController.navigationBar.topItem?.title = "Beacon Scanner"
-        navigationController.navigationBar.prefersLargeTitles = true
-        window.rootViewController = navigationController
-
+        let window = UIWindow(windowScene: scene)
+        let navController = UINavigationController()
+        
+        coordinator = MainCoordinator(navigationController: navController)
+        coordinator?.start()
+        window.rootViewController = navController
         self.window = window
+        
         window.makeKeyAndVisible()
 
     }

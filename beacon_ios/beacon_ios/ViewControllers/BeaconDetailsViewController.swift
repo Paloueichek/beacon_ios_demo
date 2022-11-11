@@ -7,11 +7,13 @@
 
 import UIKit
 
-protocol BeaconDetailsDelegate: class {
+protocol BeaconDetailsDelegate: AnyObject {
     func addBeacon(item: Beacon)
 }
 
 class BeaconDetailsViewController: UIViewController {
+    
+    weak var coordinator: DetailCoordinator?
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -35,7 +37,6 @@ class BeaconDetailsViewController: UIViewController {
         let uuidTextField = UITextField()
         uuidTextField.translatesAutoresizingMaskIntoConstraints = false
         uuidTextField.backgroundColor = .gray
-
         return uuidTextField
     }()
     
@@ -111,7 +112,7 @@ class BeaconDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBlue
+        self.view.backgroundColor = .white
         
         setupViews()
         setupConstraints()
