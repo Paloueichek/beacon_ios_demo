@@ -18,7 +18,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func start() {
         navigationController.delegate = self
         let beaconManager = BeaconManagerImp()
-        let listPresenter = BeaconListPresenterImp(beaconManager: beaconManager)
+        let listPresenter = BeaconListPresenterImp(beaconManager: beaconManager, coordinator: self)
         let listVc = BeaconListViewController(presenter: listPresenter)
         listVc.coordinator = self
         navigationController.viewControllers = [listVc]

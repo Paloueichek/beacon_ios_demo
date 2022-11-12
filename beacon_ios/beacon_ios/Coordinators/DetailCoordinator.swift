@@ -11,7 +11,6 @@ import UIKit
 class DetailCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -20,6 +19,5 @@ class DetailCoordinator: Coordinator {
         let detailVC = BeaconDetailsViewController()
         detailVC.coordinator = self
         navigationController.pushViewController(detailVC, animated: true)
-        
     }
 }

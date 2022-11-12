@@ -78,7 +78,7 @@ class BeaconListViewController: UIViewController {
 extension BeaconListViewController {
     
     @objc func addBeaconButtonPressed(_ sender: Any) {
-        coordinator?.goToDetailsVC()
+        presenter?.goToDetail()
     }
 }
 

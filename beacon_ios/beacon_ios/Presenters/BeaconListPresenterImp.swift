@@ -13,11 +13,12 @@ protocol BeaconListPresenter {
     var fetchedBeacons: [Beacon] { get set }
     func stopMonitoring(item: Beacon)
     func removeBeacon(indexPath: Int)
+    func goToDetail()
     func persistItems()
     func loadItems()
 }
 
-class BeaconListPresenterImp: BeaconListPresenter{
+class BeaconListPresenterImp: BeaconListPresenter {
 
     var fetchedBeacons: [Beacon] = []
     var allEvents: [Beacon: [EventModel]] = [:]
@@ -26,11 +27,17 @@ class BeaconListPresenterImp: BeaconListPresenter{
     private var beaconManager: BeaconManager
     private let beaconStoreManager = BeaconStorageManager()
     private var summaries: [BeaconContactsSummary] = []
+    private var coordinator: MainCoordinator
     
-    init(beaconManager: BeaconManager) {
+    init(beaconManager: BeaconManager, coordinator: MainCoordinator) {
+        self.coordinator = coordinator
         self.beaconManager = beaconManager
         self.beaconManager.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(onAppEnteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    func goToDetail() {
+        coordinator.goToDetailsVC()
     }
     
     func stopMonitoring(item: Beacon) {
