@@ -8,12 +8,12 @@
 import UIKit
 
 protocol BeaconDetailsDelegate: AnyObject {
-    func addBeacon(item: Beacon)
+    func didAddBeacon(item: Beacon)
 }
 
 class BeaconDetailsViewController: UIViewController {
     
-    weak var coordinator: DetailCoordinator?
+    weak var coordinator: MainCoordinator?
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -211,8 +211,8 @@ extension BeaconDetailsViewController {
         
         let item = Beacon(uuid: uuidString, major: major, minor: minor, name: name)
         if item.isValid {
-            delegate?.addBeacon(item: item)
-            self.dismiss(animated: true)
+            delegate?.didAddBeacon(item: item)
+            coordinator?.popViewController(animated: true)
         } else {
             let alert = UIAlertController(title: "Enter valid UUID", message: "You didn't enter proper UUID ", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default))

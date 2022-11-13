@@ -24,12 +24,13 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.viewControllers = [listVc]
     }
     
-    func goToDetailsVC() {
-        let child = DetailCoordinator(navigationController: navigationController)
-        childCoordinators.append(child)
-        child.start()
+    func goToDetailsVC(delegate: BeaconDetailsDelegate) {
+        let detailVC = BeaconDetailsViewController()
+        detailVC.delegate = delegate
+        detailVC.coordinator = self
+        navigationController.pushViewController(detailVC, animated: true)
     }
-    
+///MARK: For future purposes when we can have more child coordinators that will need to be removed when we enter more data
     func removeChild(_ child: Coordinator) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
@@ -39,6 +40,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         }
     }
     
+///MARK: For future purposes when want to create more coordinators and successfully remove them
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         
         guard let fromViewControllers = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
@@ -48,9 +50,11 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         if navigationController.viewControllers.contains(fromViewControllers) {
             return
         }
-         
-        if let detailVC = fromViewControllers as? BeaconDetailsViewController {
-            removeChild(detailVC.coordinator!)
-        }
+    }
+}
+
+extension MainCoordinator {
+    func popViewController(animated: Bool) {
+        navigationController.popViewController(animated: animated)
     }
 }

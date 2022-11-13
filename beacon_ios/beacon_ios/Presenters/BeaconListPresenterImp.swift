@@ -37,7 +37,7 @@ class BeaconListPresenterImp: BeaconListPresenter {
     }
     
     func goToDetail() {
-        coordinator.goToDetailsVC()
+        coordinator.goToDetailsVC(delegate: self)
     }
     
     func stopMonitoring(item: Beacon) {
@@ -52,7 +52,7 @@ class BeaconListPresenterImp: BeaconListPresenter {
        fetchedBeacons = self.beaconStoreManager.loadBeacons()
     }
     
-    func addBeacon(item: Beacon) {
+    func didAddBeacon(item: Beacon) {
         fetchedBeacons.append(item)
         beaconManager.startMonitoring(item)
         persistItems()
@@ -139,5 +139,11 @@ extension BeaconListPresenterImp : BeaconLocationManagerDelegate {
     
     func onLocationManagerLeft(region: CLBeaconRegion) {
         
+    }
+}
+
+extension BeaconListPresenterImp: BeaconDetailsDelegate {
+     func addBeacon(item: Beacon) {
+         fetchedBeacons.append(item)
     }
 }

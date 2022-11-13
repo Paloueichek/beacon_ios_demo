@@ -29,7 +29,6 @@
 		CDA4AE0D2909964200E66B09 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4AE0C2909964200E66B09 /* BeaconManager.swift */; };
 		CDDC4430291693460012A975 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDC442F291693460012A975 /* Coordinator.swift */; };
 		CDDC4432291693850012A975 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDC4431291693850012A975 /* MainCoordinator.swift */; };
-		CDDC443429169FA40012A975 /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDC443329169FA40012A975 /* DetailCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +75,6 @@
 		CDA4AE0C2909964200E66B09 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 		CDDC442F291693460012A975 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		CDDC4431291693850012A975 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		CDDC443329169FA40012A975 /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,7 +226,6 @@
 			children = (
 				CDDC442F291693460012A975 /* Coordinator.swift */,
 				CDDC4431291693850012A975 /* MainCoordinator.swift */,
-				CDDC443329169FA40012A975 /* DetailCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -366,7 +363,6 @@
 				CDDC4432291693850012A975 /* MainCoordinator.swift in Sources */,
 				CDDC4430291693460012A975 /* Coordinator.swift in Sources */,
 				CD2C7A842909D8D70005020D /* CLBeacon+Ext.swift in Sources */,
-				CDDC443429169FA40012A975 /* DetailCoordinator.swift in Sources */,
 				CDA4AE04290993E900E66B09 /* BeaconListPresenterImp.swift in Sources */,
 				CDA4ADD62909915100E66B09 /* BeaconListViewController.swift in Sources */,
 				CDA4AE072909945D00E66B09 /* Beacon.swift in Sources */,

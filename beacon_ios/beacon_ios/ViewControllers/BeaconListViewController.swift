@@ -50,11 +50,12 @@ class BeaconListViewController: UIViewController {
         setupViews()
         setupConstraints()
         presenter?.loadItems()
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     private func setupViews() {
@@ -92,14 +93,6 @@ extension BeaconListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier) as! CustomCell
         
-//        let events = presenter?.allEvents.flatMap { $1 }
-//        cell.nameLabel.text = events?[indexPath.row].event
-//        cell.uuidLabel.text = events?[indexPath.row].uuid
-//        cell.majorLabel.text = events?[indexPath.row].major
-//        cell.minorLabel.text = events?[indexPath.row].minor
-//        cell.rssiLabel.text = events?[indexPath.row].rssi?.string
-//        cell.distanceLabel.text = events?[indexPath.row].distance?.string
-        
         cell.nameLabel.text = presenter?.fetchedBeacons[indexPath.row].name
         cell.uuidLabel.text = presenter?.fetchedBeacons[indexPath.row].uuid
         cell.majorLabel.text = presenter?.fetchedBeacons[indexPath.row].major.string
@@ -116,32 +109,20 @@ extension BeaconListViewController: UITableViewDelegate, UITableViewDataSource {
             guard let fetchBeacons = presenter?.fetchedBeacons else {
                 return
             }
+            
         presenter?.stopMonitoring(item: fetchBeacons[indexPath.row])
-        presenter?.fetchedBeacons.remove(at: indexPath.row)
-            if let fetchedBeacons = presenter?.fetchedBeacons {
-                let newIndexPath = IndexPath(row: fetchedBeacons.count, section: 0)
-                tableView.beginUpdates()
-                tableView.deleteRows(at: [newIndexPath], with: .automatic)
-                tableView.endUpdates()
-                presenter?.persistItems()
-                } else {
-                print("Error Adding Beacons")
-            }
-        }
-    }
-}
-
-extension BeaconListViewController: BeaconDetailsDelegate {
-    func addBeacon(item: Beacon) {
-        presenter?.fetchedBeacons.append(item)
-        if let fetchedBeacons = presenter?.fetchedBeacons {
-            let newIndexPath = IndexPath(row: fetchedBeacons.count - 1 , section: 0)
-            tableView.beginUpdates()
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-            tableView.endUpdates()
-            presenter?.persistItems()
-            } else {
-            print("Error Adding Beacons")
+        presenter?.removeBeacon(indexPath: indexPath.row)
+        tableView.reloadData()
+//            if let fetchedBeacons = presenter?.fetchedBeacons {
+//                let newIndexPath = IndexPath(row: fetchedBeacons.count, section: 0)
+//                tableView.beginUpdates()
+//                tableView.deleteRows(at: [newIndexPath], with: .automatic)
+//                tableView.endUpdates()
+//                tableView.reloadData()
+//                presenter?.persistItems()
+//                } else {
+//                print("Error Adding Beacons")
+//            }
         }
     }
 }
