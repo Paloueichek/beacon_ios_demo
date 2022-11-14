@@ -113,16 +113,6 @@ extension BeaconListViewController: UITableViewDelegate, UITableViewDataSource {
         presenter?.stopMonitoring(item: fetchBeacons[indexPath.row])
         presenter?.removeBeacon(indexPath: indexPath.row)
         tableView.reloadData()
-//            if let fetchedBeacons = presenter?.fetchedBeacons {
-//                let newIndexPath = IndexPath(row: fetchedBeacons.count, section: 0)
-//                tableView.beginUpdates()
-//                tableView.deleteRows(at: [newIndexPath], with: .automatic)
-//                tableView.endUpdates()
-//                tableView.reloadData()
-//                presenter?.persistItems()
-//                } else {
-//                print("Error Adding Beacons")
-//            }
         }
     }
 }
